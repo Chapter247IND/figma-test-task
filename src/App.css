@@ -1,0 +1,114 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+button:focus {
+  outline: 0;
+}
+.btn.focus, .btn:focus {
+  outline: 0;
+  box-shadow: none;
+  text-decoration: none;;
+}
+
+.btn-theme{
+  background: #F8951B;
+  border-radius: 30px;
+  border: 1px solid #F8951B;
+  font-family: 'Mulish', sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #FFFFFF;
+  transition:all 0.3s ease;
+  min-width:200px;
+  padding:8px 20px;
+}
+.btn-theme:hover{
+  background: #FB9448;
+  border: 1px solid #FB9448;
+  color: #FFFFFF;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-theme-outline{
+  border: 1px solid #F8951B;
+  border-radius: 30px;
+  font-family: 'Mulish', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  color: #F8951B;
+  transition:all 0.3s ease;
+  min-width:200px;
+  padding:8px 20px;
+  cursor: pointer;
+}
+.btn-theme-outline:hover{
+  background: #FB9448;
+  border: 1px solid #FB9448;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.btn-theme-outline:disabled, .btn-theme:disabled, .btn-theme-outline:disabled:hover, .btn-theme:disabled:hover{
+  border: 1px solid #E5E5E5;
+  background: #E5E5E5;
+  color: #787878;
+  text-decoration: none;
+  opacity: 1;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.navbar-header{
+  border: 1px solid #E5E5E5;
+  background:#fff;
+}
+.visa{
+  background: #224DBA;
+  color: #fff;
+}
