@@ -308,6 +308,7 @@ const Main = (props) => {
       expireDate: '',
     });
   };
+  console.log('Hiiii i am in parent 125126152');
   return (
     <>
       <Header />
