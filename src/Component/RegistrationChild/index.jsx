@@ -215,7 +215,7 @@ const Child = () => {
                         });
                       } else {
                         console.log('inside else');                        
-                        handleStepper('previous');
+                        handleStepper('next');
                       }
                     }}
                     disabled={

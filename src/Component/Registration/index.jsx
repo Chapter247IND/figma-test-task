@@ -51,9 +51,9 @@ const Main = (props) => {
     // go back from child to parent
     if (locationState && locationState.step === 3) {
       setcurrentStep(2);
-      history.push(`/Registrationform/#3`);
+      history.push(`/RegistrationForm/#3`);
     } else {
-      history.push(`/Registrationform/#${steps + 1}`);
+      history.push(`/RegistrationForm/#${steps + 1}`);
     }
     console.log('locationState', locationState);
 
