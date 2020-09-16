@@ -28,7 +28,7 @@ const Step3Component = (props) => {
     }
     // eslint-disable-next-line
   }, []);
-  const { infoData, setcurrentStep, setinfoData } = props;
+  const {  setcurrentStep, setinfoData } = props;
   return (
     <>
       <Form className="resgistration-form">

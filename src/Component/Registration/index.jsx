@@ -14,26 +14,26 @@ import Step5Component from './Step5';
 import Done from './Done';
 import { Stepper } from 'react-form-stepper';
 import { Email_Serviceid, Email_Template } from '../../config/AppConfig';
-export const UserContext = React.createContext({});
+// export const UserContext = React.createContext({});
 const Main = (props) => {
   // state for active step
   const [steps, setcurrentStep] = React.useState(0);
-
-  // state object to store user information
-  const [infoData, setinfoData] = React.useState({
-    numValue: '',
-    name: 'Joe Doe',
-    email: '',
-    contact: '',
-    country: 'India',
-    duration: 'Daily',
-    password: '',
-    cardNumber: '',
-    expireDate: '',
-    expMonth: '',
-    expYear: '',
-    cvv: '',
-  });
+  const { infoData, setinfoData } = props;
+  // // state object to store user information
+  // const [infoData, setinfoData] = React.useState({
+  //   numValue: '',
+  //   name: 'Joe Doe',
+  //   email: '',
+  //   contact: '',
+  //   country: 'India',
+  //   duration: 'Daily',
+  //   password: '',
+  //   cardNumber: '',
+  //   expireDate: '',
+  //   expMonth: '',
+  //   expYear: '',
+  //   cvv: '',
+  // });
   const { state: locationState } = useLocation();
   //  state to manage error
   const [error, setError] = React.useState({
@@ -52,9 +52,9 @@ const Main = (props) => {
     // go back from child to parent
     if (locationState && locationState.step === 3) {
       setcurrentStep(2);
-      history.push(`/RegistrationForm/#3`);
+      history.push(`/Registrationform/#3`);
     } else {
-      history.push(`/RegistrationForm/#${steps + 1}`);
+      history.push(`/Registrationform/#${steps + 1}`);
     }
     console.log('locationState', locationState);
 
@@ -101,7 +101,9 @@ const Main = (props) => {
     } else {
       /* if (steps === 1) {
         handleSubmit();
-      } else */ if (steps === 3) {
+      } else */ if (
+        steps === 3
+      ) {
         handlePayment();
       } else {
         setcurrentStep(steps + 1);
@@ -111,7 +113,7 @@ const Main = (props) => {
 
   // validation for payment method page
   const handlePayment = () => {
-    const { cardNumber, expMonth, expYear, cvv, expireDate } = infoData;
+    const { cardNumber, expMonth, expYear, cvv, expireDate } = props.infoData;
     const payload = {
       cardNumber: cardNumber.replace(/_/g, ''),
       expMonth: expMonth,
@@ -318,88 +320,90 @@ const Main = (props) => {
       <Header />
       <section className='form-section'>
         <Container>
-          <UserContext.Provider
+          {/* <UserContext.Provider
             value={{
               infoData,
             }}
-          >
-            {!emailSuccess ? (
-              <>
-                {steps === 5 ? null : (
-                  <>
-                    <h1 className='main-title'>Registration Form</h1>
-                    <p className='sub-title'>
-                      This is Example Registratino form
-                    </p>
-                    <Stepper
-                      className='stepper'
-                      steps={[
-                        {
-                          label: steps === 1 || steps > 1 ? 'TITULAR' : '',
-                        },
-                        {
-                          label: steps === 2 || steps > 2 ? 'CONTACTO' : '',
-                        },
-                        {
-                          label: steps === 3 || steps > 3 ? 'PLAN' : '',
-                        },
-                        {
-                          label: steps === 4 || steps > 4 ? 'PAGO' : '',
-                        },
-                        {
-                          title: '',
-                        },
-                      ]}
-                      activeStep={steps}
-                      completeColor='#49B8AD'
-                      activeTitleColor='#49B8AD'
-                      completeBorderStyle='#49B8AD'
-                      // eslint-disable-next-line
-                      className={'stepclass'}
-                      stepClassName={'stepclassName'}
-                      // disabledSteps={ [0] }
+          > */}
+          {!emailSuccess ? (
+            <>
+              {steps === 5 ? null : (
+                <>
+                  <h1 className='main-title'>Registration Form</h1>
+                  <p className='sub-title'>This is Example Registratino form</p>
+                  <Stepper
+                    className='stepper'
+                    steps={[
+                      {
+                        label: steps === 1 || steps > 1 ? 'TITULAR' : '',
+                      },
+                      {
+                        label: steps === 2 || steps > 2 ? 'CONTACTO' : '',
+                      },
+                      {
+                        label: steps === 3 || steps > 3 ? 'PLAN' : '',
+                      },
+                      {
+                        label: steps === 4 || steps > 4 ? 'PAGO' : '',
+                      },
+                      {
+                        title: '',
+                      },
+                    ]}
+                    activeStep={steps}
+                    completeColor='#49B8AD'
+                    activeTitleColor='#49B8AD'
+                    completeBorderStyle='#49B8AD'
+                    // eslint-disable-next-line
+                    className={'stepclass'}
+                    stepClassName={'stepclassName'}
+                    // disabledSteps={ [0] }
+                  />
+                </>
+              )}
+              {steps === 5 ? (
+                <div>
+                  <Done infoData={infoData} />
+                </div>
+              ) : (
+                <div className='inner-body'>
+                  {steps === 0 ? (
+                    <Step1Component
+                      infoData={infoData}
+                      handleSelectChange={handleSelectChange}
+                      handleChange={handleChange}
+                      error={error}
                     />
-                  </>
-                )}
-                {steps === 5 ? (
-                  <div>
-                    <Done infoData={infoData} />
-                  </div>
-                ) : (
-                  <div className='inner-body'>
-                    {steps === 0 ? (
-                      <Step1Component
-                        infoData={infoData}
-                        handleSelectChange={handleSelectChange}
-                        handleChange={handleChange}
-                        error={error}
-                      />
-                    ) : steps === 1 ? (
-                      <Step2Component
-                        infoData={infoData}
-                        handleContact={handleContact}
-                        handleChange={handleChange}
-                        error={error}
-                      />
-                    ) : steps === 2 ? (
-                      <Step3Component
-                        infoData={infoData}
-                        handleSelectChange={handleSelectChange}
-                        {...props}
-                      />
-                    ) : steps === 3 ? (
-                      <Step4Component
-                        infoData={infoData}
-                        handleChange={handleChange}
-                        error={error}
-                        handleExpireDate={handleExpireDate}
-                      />
-                    ) : steps === 4 ? (
-                      (<Step5Component
-                        handleChange={handleChange}
-                        infoData={infoData}
-                        error={error}
-                      /> /* : steps === 5 ? (
+                  ) : steps === 1 ? (
+                    <Step2Component
+                      infoData={infoData}
+                      handleContact={handleContact}
+                      handleChange={handleChange}
+                      error={error}
+                    />
+                  ) : steps === 2 ? (
+                    <Step3Component
+                      infoData={infoData}
+                      handleSelectChange={handleSelectChange}
+                      {...props}
+                    />
+                  ) : steps === 3 ? (
+                    <Step4Component
+                      infoData={infoData}
+                      handleChange={handleChange}
+                      error={error}
+                      handleExpireDate={handleExpireDate}
+                    />
+                  ) : steps === 4 ? (
+                    (<Step5Component
+                      handleChange={handleChange}
+                      infoData={infoData}
+                      error={error}
+                    /> /* : steps === 5 ? (
+                 <Done infoData={infoData} />
+               )  */ /*: steps === 5 ? (
+                 <Done infoData={infoData} />
+               )  */ /*: steps === 5 ? (
                  <Done infoData={infoData} />
                )  */ /*: steps === 5 ? (
                  <Done infoData={infoData} />
@@ -422,12 +426,44 @@ const Main = (props) => {
                )  */ /*: steps === 5 ? (
                  <Done infoData={infoData} />
                )  */)
-                    ) : null}
+                  ) : null}
+                </div>
+              )}
+              <>
+                {steps === 0 ? (
+                  <div className='d-flex align-items-center justify-content-end btn-wrap'>
+                    <Button
+                      variant='link'
+                      className='btn-theme mb-2'
+                      onClick={() => handleStepper('next')}
+                      disabled={
+                        error &&
+                        (error.email || error.numValue || error.contact)
+                          ? true
+                          : steps === 1 &&
+                            (!infoData.email || !infoData.contact)
+                          ? true
+                          : steps === 0 && !infoData.numValue
+                          ? true
+                          : false
+                      }
+                    >
+                      Continue
+                    </Button>
                   </div>
-                )}
-                <>
-                  {steps === 0 ? (
-                    <div className='d-flex align-items-center justify-content-end btn-wrap'>
+                ) : steps === 5 ? null : (
+                  <div className='d-flex align-items-center justify-content-between btn-wrap'>
+                    {steps === 0 ? null : (
+                      <Button
+                        variant='link'
+                        className='btn-theme-outline mb-2'
+                        onClick={() => handleStepper('previous')}
+                        disabled={steps === 0 ? 'cursor' : ''}
+                      >
+                        Previous
+                      </Button>
+                    )}
+                    <div>
                       <Button
                         variant='link'
                         className='btn-theme mb-2'
@@ -444,74 +480,42 @@ const Main = (props) => {
                             : false
                         }
                       >
-                        Continue
+                        {steps === 1 && isEmailLoading
+                          ? 'Loading...'
+                          : steps === 4
+                          ? 'Complete It!'
+                          : 'Continue'}
                       </Button>
-                    </div>
-                  ) : steps === 5 ? null : (
-                    <div className='d-flex align-items-center justify-content-between btn-wrap'>
-                      {steps === 0 ? null : (
-                        <Button
-                          variant='link'
-                          className='btn-theme-outline mb-2'
-                          onClick={() => handleStepper('previous')}
-                          disabled={steps === 0 ? 'cursor' : ''}
-                        >
-                          Previous
-                        </Button>
+                      {error &&
+                      (error.cvv ||
+                        error.expireDate ||
+                        error.expireYearError ||
+                        error.expireMonthError ||
+                        error.cardNumber ||
+                        error.numValue) ? (
+                        // email: '',
+                        // contact: '',
+                        // expireYearError: '',
+                        // expireMonthError: '',
+                        // password: '',
+                        <p className='error-muted'>
+                          Please check the Error and resolve it
+                        </p>
+                      ) : (
+                        ''
                       )}
-                      <div>
-                        <Button
-                          variant='link'
-                          className='btn-theme mb-2'
-                          onClick={() => handleStepper('next')}
-                          disabled={
-                            error &&
-                            (error.email || error.numValue || error.contact)
-                              ? true
-                              : steps === 1 &&
-                                (!infoData.email || !infoData.contact)
-                              ? true
-                              : steps === 0 && !infoData.numValue
-                              ? true
-                              : false
-                          }
-                        >
-                          {steps === 1 && isEmailLoading
-                            ? 'Loading...'
-                            : steps === 4
-                            ? 'Complete It!'
-                            : 'Continue'}
-                        </Button>
-                        {error &&
-                        (error.cvv ||
-                          error.expireDate ||
-                          error.expireYearError ||
-                          error.expireMonthError ||
-                          error.cardNumber ||
-                          error.numValue) ? (
-                          // email: '',
-                          // contact: '',
-                          // expireYearError: '',
-                          // expireMonthError: '',
-                          // password: '',
-                          <p className='error-muted'>
-                            Please check the Error and resolve it
-                          </p>
-                        ) : (
-                          ''
-                        )}
-                      </div>
                     </div>
-                  )}
-                </>
+                  </div>
+                )}
               </>
-            ) : (
-              <div>
-                {' '}
-                <EmailSent handleStepper={handleStepper} />{' '}
-              </div>
-            )}
-          </UserContext.Provider>
+            </>
+          ) : (
+            <div>
+              {' '}
+              <EmailSent handleStepper={handleStepper} />{' '}
+            </div>
+          )}
+          {/* </UserContext.Provider> */}
         </Container>
       </section>
     </>
