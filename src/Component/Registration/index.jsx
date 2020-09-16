@@ -57,7 +57,6 @@ const Main = (props) => {
     } else {
       history.push(`/Registrationform/#${steps + 1}`);
     }
-    // console.log('locationState', locationState);
 
     // eslint-disable-next-line
   }, [steps]);
@@ -100,9 +99,11 @@ const Main = (props) => {
       setEmailSuccess(false);
       setcurrentStep(2);
     } else {
-      if (steps === 1) {
+      /* if (steps === 1) {
         handleSubmit();
-      } else if (steps === 3) {
+      } else */ if (
+        steps === 3
+      ) {
         handlePayment();
       } else {
         setcurrentStep(steps + 1);
@@ -399,6 +400,16 @@ const Main = (props) => {
                       infoData={infoData}
                       error={error}
                     /> /* : steps === 5 ? (
+                 <Done infoData={infoData} />
+               )  */ /*: steps === 5 ? (
+                 <Done infoData={infoData} />
+               )  */ /*: steps === 5 ? (
+                 <Done infoData={infoData} />
+               )  */ /*: steps === 5 ? (
+                 <Done infoData={infoData} />
+               )  */ /*: steps === 5 ? (
+                 <Done infoData={infoData} />
+               )  */ /*: steps === 5 ? (
                  <Done infoData={infoData} />
                )  */ /*: steps === 5 ? (
                  <Done infoData={infoData} />

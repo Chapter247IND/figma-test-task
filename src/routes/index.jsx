@@ -43,6 +43,7 @@ const AppRoutes = (props) => {
     expMonth: '',
     expYear: '',
     cvv: '',
+    promo:''
   });
   return (
     <Switch>
