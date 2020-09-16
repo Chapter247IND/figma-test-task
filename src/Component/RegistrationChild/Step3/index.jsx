@@ -36,7 +36,7 @@ const Step3Component = (props) => {
           &nbsp;
           {infoData.name}
         </Row>
-        <Row>
+        <Row className = "mt-2 cursor-pointer" >
           <span
             onClick={() => {
               setcurrentStep(0);

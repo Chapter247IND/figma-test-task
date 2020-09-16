@@ -112,3 +112,7 @@ button:focus {
   background: #224DBA;
   color: #fff;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
