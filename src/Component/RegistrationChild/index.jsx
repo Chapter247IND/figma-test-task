@@ -32,7 +32,7 @@ const Child = () => {
 
   //  Manage routing with hash according to active stepper
   useEffect(() => {
-    // history.push(`/Registrationform/#${steps + 1}`);
+     history.push(`/RegistrationChild/#${steps + 1}`);
     // eslint-disable-next-line
   }, [steps]);
 
@@ -177,6 +177,8 @@ const Child = () => {
                 <Step3Component
                   infoData={infoData}
                   handleSelectChange={handleSelectChange}
+                  setcurrentStep={setcurrentStep}
+                  setinfoData={setinfoData}
                 />
               ) : null}
             </div>
