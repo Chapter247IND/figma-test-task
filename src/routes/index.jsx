@@ -3,17 +3,26 @@ import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 
 // Pages
 const Main = React.lazy(() => import("../Component/Registration"));
+const ChildComponent = React.lazy(() =>
+  import("../Component/RegistrationChild")
+);
 const Routes = [
   {
-    exact: false,
-    path: "/",
-    name: "Main",
+    exact: true,
+    path: "/RegistrationForm",
+    name: "MainPage",
     component: Main,
   },
   {
     exact: true,
-    path: "/RegistrationForm/#number",
-    name: "MainPage",
+    path: "/RegistrationChild",
+    name: "Child",
+    component: ChildComponent,
+  },
+  {
+    exact: true,
+    path: "/",
+    name: "Main",
     component: Main,
   },
 ];
@@ -22,7 +31,7 @@ class AppRoutes extends Component {
   componentDidMount() {}
   render() {
     return (
-      <>
+     
         <Switch>
           {Routes.map((route, index) => {
             return (
@@ -36,15 +45,22 @@ class AppRoutes extends Component {
                     <route.component {...props} {...this.props} />
                   )}
                 />
-                <Route exact path="/" component={Main}>
-                  {" "}
-                  <Redirect to="/Registrationform/#1" />{" "}
-                </Route>
+               
+                  <Route exact path="/" component={Main}>
+                    {" "}
+                    <Redirect to="/Registrationform/#1" />{" "}
+                  </Route>
+               
+                  <Route
+                    path="/RegistrationChild"
+                    component={ChildComponent}
+                  ></Route>
+               
               </>
             );
           })}
         </Switch>
-      </>
+     
     );
   }
 }

@@ -49,7 +49,7 @@ const Child = () => {
 
   //  Manage routing with hash according to active stepper
   useEffect(() => {
-    history.push(`/Registrationform/#${steps + 1}`);
+     history.push(`/RegistrationChild/#${steps + 1}`);
     // eslint-disable-next-line
   }, [steps]);
 
@@ -312,7 +312,7 @@ const Child = () => {
           <>
             {/* {steps === 5 ? null : ( */}
             <>
-              <h1 className='main-title'>Registration Form</h1>
+              <h1 className='main-title'>Registration Form Child</h1>
               <p className='sub-title'>This is Example Registratino form</p>
               <Stepper
                 className='stepper'

@@ -32,9 +32,9 @@ const Step3Component = (props) => {
           recurecnce.
         </p>
         <Link
-          to='/RegistrationformChild/#1'
+          to='/RegistrationChild'
           className='theme-link'
-          // onClick={props.history.push(AppRoutes.CHILD)}
+          onClick={()=>props.history.push("/RegistrationChild")}
         >
           Questions?
         </Link>

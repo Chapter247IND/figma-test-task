@@ -46,17 +46,15 @@ const Main = (props) => {
   const [emailSuccess, setEmailSuccess] = React.useState(false);
   const [isEmailLoading, setisEmailLoading] = React.useState(false);
   let history = useHistory();
-
   //  Manage routing with hash according to active stepper
   useEffect(() => {
     history.push(`/Registrationform/#${steps + 1}`);
     // eslint-disable-next-line
   }, [steps]);
 
+
   //  For sending email
   const sendFeedback = (templateId, params) => {
-    console.log('templateId', templateId);
-    console.log('Email_serviceid', Email_Serviceid);
 
     setisEmailLoading(true);
     window.emailjs
@@ -75,15 +73,15 @@ const Main = (props) => {
   };
 
   // send email
-  const handleSubmit = () => {
-    const templateId = Email_Template;
-    console.log('Email_Template', Email_Template);
-    sendFeedback(templateId, {
-      message_html: '',
-      from_name: infoData.name,
-      reply_to: infoData.email,
-    });
-  };
+  // const handleSubmit = () => {
+  //   const templateId = Email_Template;
+  //   console.log('Email_Template', Email_Template);
+  //   sendFeedback(templateId, {
+  //     message_html: '',
+  //     from_name: infoData.name,
+  //     reply_to: infoData.email,
+  //   });
+  // };
 
   //  handle next & previous button
   const handleStepper = (name) => {
@@ -114,7 +112,6 @@ const Main = (props) => {
     };
     let isError = false;
     let errors = { ...error };
-    console.log('payloadpayload', payload);
     var n = new Date().getFullYear().toString().substr(2, 2);
     if (parseInt(payload.expMonth) > 12 && payload.expYear) {
       setError({
@@ -137,7 +134,6 @@ const Main = (props) => {
       payload.expYear &&
       payload.expMonth
     ) {
-      console.log('hereeeeeeeeeeee');
       errors.expireYearError = 'Invalid date';
       errors.expireMonthError = '';
       isError = true;
@@ -321,69 +317,7 @@ const Main = (props) => {
                   <p className='sub-title'>This is Example Registratino form</p>
                   <Stepper
                     className='stepper'
-                    steps={
-                      // steps === 0
-                      //   ? [
-                      //       {
-                      //         title: '',
-                      //       },
-                      //       {
-                      //         title: '',
-                      //       },
-                      //     ]
-                      //   : steps === 1
-                      //   ? [
-                      //       {
-                      //         title: 'TITULAR',
-                      //       },
-                      //       {
-                      //         title: '',
-                      //       },
-                      //     ]
-                      //   : steps === 2
-                      //   ? [
-                      //       {
-                      //         title: 'TITULAR',
-                      //       },
-                      //       {
-                      //         title: 'CONTACTO',
-                      //       },
-                      //       {
-                      //         title: '',
-                      //       },
-                      //     ]
-                      //   : steps === 3
-                      //   ? [
-                      //       {
-                      //         title: 'TITULAR',
-                      //       },
-                      //       {
-                      //         title: 'CONTACTO',
-                      //       },
-                      //       {
-                      //         title: 'PLAN',
-                      //       },
-                      //       {
-                      //         title: '',
-                      //       },
-                      //     ]
-                      //   : steps === 4
-                      //   ? [
-                      //       {
-                      //         title: 'TITULAR',
-                      //       },
-                      //       {
-                      //         title: 'CONTACTO',
-                      //       },
-                      //       {
-                      //         title: 'PLAN',
-                      //       },
-                      //       {
-                      //         title: 'PAGO',
-                      //       },
-                      //     ]
-                      //   : null
-                      [
+                    steps={ [
                         {
                           label: steps === 1 || steps > 1 ? 'TITULAR' : '',
                         },
