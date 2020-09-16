@@ -34,7 +34,7 @@ const Step3Component = (props) => {
         <Link
           to='/RegistrationChild'
           className='theme-link'
-          onClick={()=>props.history.push("/RegistrationChild")}
+          onClick={() => props.history.push('/RegistrationChild')}
         >
           Questions?
         </Link>

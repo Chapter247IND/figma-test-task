@@ -3,16 +3,21 @@ import { Form, Row } from 'react-bootstrap';
 import { useEffect } from 'react';
 import addIcon from '../../../assets/img/add.svg';
 import user from '../../../assets/img/perfil.svg';
-import { Link } from 'react-router-dom';
 const Step3Component = (props) => {
   useEffect(() => {
-    const data = {
-      ...props.infoData,
-    };
+    let prevData = JSON.parse(localStorage.getItem('contactData'));
+    console.log('prevData343434', prevData);
+    // if(prevData)
+    let data = [];
+    if (prevData) {
+      data = [prevData, props.infoData];
+    } else {
+      data = [props.infoData];
+    }
     localStorage.setItem('contactData', JSON.stringify(data));
     // eslint-disable-next-line
   }, []);
-  const { infoData } = props;
+  const { infoData, setcurrentStep, setinfoData } = props;
   // console.log('durationduration', duration);
   return (
     <>
@@ -32,10 +37,22 @@ const Step3Component = (props) => {
           {infoData.name}
         </Row>
         <Row>
-          <Link to='/RegistrationformChild'>
+          <span
+            onClick={() => {
+              setcurrentStep(0);
+              setinfoData({
+                numValue: '985476238',
+                name: 'Joe Doe',
+                email: '',
+                contact: '',
+                country: 'India',
+              });
+            }}
+          >
+            {/* // set step 0 */}
             <img src={addIcon} alt='add' />
             &nbsp; Add More
-          </Link>
+          </span>
         </Row>
       </Form>
     </>

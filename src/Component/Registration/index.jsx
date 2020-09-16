@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Header from '../Layout/header';
 import { Container, Button } from 'react-bootstrap';
 // import Stepper from 'react-stepper-horizontal';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import Step2Component from './Step2';
 import Step1Component from './Step1';
 import './index.css';
@@ -33,7 +33,7 @@ const Main = (props) => {
     expYear: '',
     cvv: '',
   });
-
+  const { state: locationState } = useLocation();
   //  state to manage error
   const [error, setError] = React.useState({
     numValue: '',
@@ -48,14 +48,20 @@ const Main = (props) => {
   let history = useHistory();
   //  Manage routing with hash according to active stepper
   useEffect(() => {
-    history.push(`/Registrationform/#${steps + 1}`);
+    // go back from child to parent
+    if (locationState && locationState.step === 3) {
+      setcurrentStep(2);
+      history.push(`/Registrationform/#3`);
+    } else {
+      history.push(`/Registrationform/#${steps + 1}`);
+    }
+    console.log('locationState', locationState);
+
     // eslint-disable-next-line
   }, [steps]);
 
-
   //  For sending email
   const sendFeedback = (templateId, params) => {
-
     setisEmailLoading(true);
     window.emailjs
       .send(Email_Serviceid, templateId, params)
@@ -93,7 +99,9 @@ const Main = (props) => {
     } else {
       /* if (steps === 1) {
         handleSubmit();
-      } else */ if (steps === 3) {
+      } else */ if (
+        steps === 3
+      ) {
         handlePayment();
       } else {
         setcurrentStep(steps + 1);
@@ -318,24 +326,23 @@ const Main = (props) => {
                   <p className='sub-title'>This is Example Registratino form</p>
                   <Stepper
                     className='stepper'
-                    steps={ [
-                        {
-                          label: steps === 1 || steps > 1 ? 'TITULAR' : '',
-                        },
-                        {
-                          label: steps === 2 || steps > 2 ? 'CONTACTO' : '',
-                        },
-                        {
-                          label: steps === 3 || steps > 3 ? 'PLAN' : '',
-                        },
-                        {
-                          label: steps === 4 || steps > 4 ? 'PAGO' : '',
-                        },
-                        {
-                          title: '',
-                        },
-                      ]
-                    }
+                    steps={[
+                      {
+                        label: steps === 1 || steps > 1 ? 'TITULAR' : '',
+                      },
+                      {
+                        label: steps === 2 || steps > 2 ? 'CONTACTO' : '',
+                      },
+                      {
+                        label: steps === 3 || steps > 3 ? 'PLAN' : '',
+                      },
+                      {
+                        label: steps === 4 || steps > 4 ? 'PAGO' : '',
+                      },
+                      {
+                        title: '',
+                      },
+                    ]}
                     activeStep={steps}
                     completeColor='#49B8AD'
                     activeTitleColor='#49B8AD'
@@ -386,6 +393,14 @@ const Main = (props) => {
                       infoData={infoData}
                       error={error}
                     /> /* : steps === 5 ? (
+                 <Done infoData={infoData} />
+               )  */ /*: steps === 5 ? (
+                 <Done infoData={infoData} />
+               )  */ /*: steps === 5 ? (
+                 <Done infoData={infoData} />
+               )  */ /*: steps === 5 ? (
+                 <Done infoData={infoData} />
+               )  */ /*: steps === 5 ? (
                  <Done infoData={infoData} />
                )  */ /*: steps === 5 ? (
                  <Done infoData={infoData} />

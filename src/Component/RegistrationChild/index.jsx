@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import Step2Component from './Step2';
 import Step1Component from './Step1';
 import './index.css';
-import { isValidEmail} from '../../helper';
+import { isValidEmail } from '../../helper';
 import Step3Component from './Step3';
 import { Stepper } from 'react-form-stepper';
 const Child = () => {
@@ -32,7 +32,7 @@ const Child = () => {
 
   //  Manage routing with hash according to active stepper
   useEffect(() => {
-     history.push(`/RegistrationChild/#${steps + 1}`);
+    history.push(`/RegistrationChild/#${steps + 1}`);
     // eslint-disable-next-line
   }, [steps]);
 
@@ -190,6 +190,10 @@ const Child = () => {
                   onClick={() => {
                     if (steps === 0) {
                       // redirect to parent step 3
+                      history.push({
+                        pathname: '/RegistrationForm',
+                        state: { step: 3 },
+                      });
                     } else {
                       handleStepper('previous');
                     }
@@ -201,7 +205,17 @@ const Child = () => {
                   <Button
                     variant='link'
                     className='btn-theme mb-2'
-                    onClick={() => handleStepper('next')}
+                    onClick={() => {
+                      if (steps === 2) {
+                        // redirect to parent step 3
+                        history.push({
+                          pathname: '/RegistrationForm',
+                          state: { step: 3 },
+                        });
+                      } else {
+                        handleStepper('previous');
+                      }
+                    }}
                     disabled={
                       error && (error.email || error.numValue || error.contact)
                         ? true
