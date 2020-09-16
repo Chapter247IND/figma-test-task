@@ -406,6 +406,8 @@ const Main = (props) => {
                  <Done infoData={infoData} />
                )  */ /*: steps === 5 ? (
                  <Done infoData={infoData} />
+               )  */ /*: steps === 5 ? (
+                 <Done infoData={infoData} />
                )  */)
                   ) : null}
                 </div>

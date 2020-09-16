@@ -126,11 +126,11 @@ const Child = () => {
       [name]: value,
     });
   };
-  console.log('Hiiii i am in child 125126152');
+  // console.log('Hiiii i am in child 125126152');
   return (
     <>
       <Header />
-      {console.log('Hiiii i am in child')}
+      {/* {console.log('Hiiii i am in child')} */}
       <section className='form-section'>
         <Container>
           <>
@@ -202,6 +202,7 @@ const Child = () => {
                   Previous
                 </Button>
                 <div>
+                  {console.log('steps', steps)}
                   <Button
                     variant='link'
                     className='btn-theme mb-2'
@@ -213,6 +214,7 @@ const Child = () => {
                           state: { step: 3 },
                         });
                       } else {
+                        console.log('inside else');                        
                         handleStepper('previous');
                       }
                     }}
