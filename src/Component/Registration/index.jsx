@@ -14,7 +14,7 @@ import Step5Component from './Step5';
 import Done from './Done';
 import { Stepper } from 'react-form-stepper';
 import { Email_Serviceid, Email_Template } from '../../config/AppConfig';
-const Main = () => {
+const Main = (props) => {
   // state for active step
   const [steps, setcurrentStep] = React.useState(0);
 
@@ -93,9 +93,9 @@ const Main = () => {
       setEmailSuccess(false);
       setcurrentStep(2);
     } else {
-      if (steps === 1) {
+      /* if (steps === 1) {
         handleSubmit();
-      } else if (steps === 3) {
+      } else */ if (steps === 3) {
         handlePayment();
       } else {
         setcurrentStep(steps + 1);
@@ -436,6 +436,7 @@ const Main = () => {
                     <Step3Component
                       infoData={infoData}
                       handleSelectChange={handleSelectChange}
+                      {...props}
                     />
                   ) : steps === 3 ? (
                     <Step4Component
