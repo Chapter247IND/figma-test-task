@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form } from 'react-bootstrap';
 // import { AppRoutes } from '../../../config';
 import { Link } from 'react-router-dom';
+import { UserContext } from '..';
 const Step3Component = (props) => {
   const { handleSelectChange, infoData } = props;
   const { duration } = infoData;
-  // console.log('durationduration', duration);
+  const userDetail = useContext(UserContext);
+  // let Id: number = userDetail ? userDetail.id : '';
+  console.log('userDetail   userDetail', userDetail);
   return (
     <>
       <Form className='resgistration-form'>
