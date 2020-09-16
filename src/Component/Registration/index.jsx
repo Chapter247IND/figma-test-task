@@ -49,6 +49,7 @@ const Main = (props) => {
   let history = useHistory();
   //  Manage routing with hash according to active stepper
   useEffect(() => {
+    // localStorage
     // go back from child to parent
     if (locationState && locationState.step === 3) {
       setcurrentStep(2);
@@ -56,7 +57,7 @@ const Main = (props) => {
     } else {
       history.push(`/Registrationform/#${steps + 1}`);
     }
-    console.log('locationState', locationState);
+    // console.log('locationState', locationState);
 
     // eslint-disable-next-line
   }, [steps]);
@@ -99,11 +100,9 @@ const Main = (props) => {
       setEmailSuccess(false);
       setcurrentStep(2);
     } else {
-      /* if (steps === 1) {
+      if (steps === 1) {
         handleSubmit();
-      } else */ if (
-        steps === 3
-      ) {
+      } else if (steps === 3) {
         handlePayment();
       } else {
         setcurrentStep(steps + 1);
@@ -400,6 +399,10 @@ const Main = (props) => {
                       infoData={infoData}
                       error={error}
                     /> /* : steps === 5 ? (
+                 <Done infoData={infoData} />
+               )  */ /*: steps === 5 ? (
+                 <Done infoData={infoData} />
+               )  */ /*: steps === 5 ? (
                  <Done infoData={infoData} />
                )  */ /*: steps === 5 ? (
                  <Done infoData={infoData} />
