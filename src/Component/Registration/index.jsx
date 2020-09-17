@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import Header from '../Layout/header';
 import { Container, Button } from 'react-bootstrap';
-// import Stepper from 'react-stepper-horizontal';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import Step2Component from './Step2';
 import Step1Component from './Step1';
 import './index.css';
@@ -14,26 +13,12 @@ import Step5Component from './Step5';
 import Done from './Done';
 import { Stepper } from 'react-form-stepper';
 import { Email_Serviceid, Email_Template } from '../../config/AppConfig';
-const Main = () => {
+const Main = (props) => {
   // state for active step
   const [steps, setcurrentStep] = React.useState(0);
+  const { infoData, setinfoData } = props;
 
-  // state object to store user information
-  const [infoData, setinfoData] = React.useState({
-    numValue: '',
-    name: 'Joe Doe',
-    email: '',
-    contact: '',
-    country: 'India',
-    duration: 'Daily',
-    password: '',
-    cardNumber: '',
-    expireDate: '',
-    expMonth: '',
-    expYear: '',
-    cvv: '',
-  });
-
+  const { state: locationState } = useLocation();
   //  state to manage error
   const [error, setError] = React.useState({
     numValue: '',
@@ -49,15 +34,21 @@ const Main = () => {
 
   //  Manage routing with hash according to active stepper
   useEffect(() => {
-    history.push(`/Registrationform/#${steps + 1}`);
+    console.log(Email_Serviceid, Email_Template,'Email_Serviceid, Email_Template');
+    
+    // go back from child to parent
+    if (locationState && locationState.step === 3) {
+      setcurrentStep(2);
+      history.push(`/Registrationform/#3`);
+    } else {
+      history.push(`/Registrationform/#${steps + 1}`);
+    }
+
     // eslint-disable-next-line
   }, [steps]);
 
   //  For sending email
   const sendFeedback = (templateId, params) => {
-    console.log('templateId', templateId);
-    console.log('Email_serviceid', Email_Serviceid);
-
     setisEmailLoading(true);
     window.emailjs
       .send(Email_Serviceid, templateId, params)
@@ -84,6 +75,7 @@ const Main = () => {
       reply_to: infoData.email,
     });
   };
+  console.log('props.infoData', infoData);
 
   //  handle next & previous button
   const handleStepper = (name) => {
@@ -105,7 +97,7 @@ const Main = () => {
 
   // validation for payment method page
   const handlePayment = () => {
-    const { cardNumber, expMonth, expYear, cvv, expireDate } = infoData;
+    const { cardNumber, expMonth, expYear, cvv, expireDate } = props.infoData;
     const payload = {
       cardNumber: cardNumber.replace(/_/g, ''),
       expMonth: expMonth,
@@ -114,7 +106,6 @@ const Main = () => {
     };
     let isError = false;
     let errors = { ...error };
-    console.log('payloadpayload', payload);
     var n = new Date().getFullYear().toString().substr(2, 2);
     if (parseInt(payload.expMonth) > 12 && payload.expYear) {
       setError({
@@ -137,16 +128,10 @@ const Main = () => {
       payload.expYear &&
       payload.expMonth
     ) {
-      console.log('hereeeeeeeeeeee');
       errors.expireYearError = 'Invalid date';
       errors.expireMonthError = '';
       isError = true;
     } else {
-      // setError({
-      //   ...error,
-      //   expireYearError: "",
-      //   expireMonthError: "",
-      // });
       errors.expireYearError = '';
       errors.expireMonthError = '';
 
@@ -308,11 +293,17 @@ const Main = () => {
       expireDate: '',
     });
   };
+  console.log('Hiiii i am in parent 125126152');
   return (
     <>
       <Header />
       <section className='form-section'>
         <Container>
+          {/* <UserContext.Provider
+            value={{
+              infoData,
+            }}
+          > */}
           {!emailSuccess ? (
             <>
               {steps === 5 ? null : (
@@ -321,86 +312,23 @@ const Main = () => {
                   <p className='sub-title'>This is Example Registratino form</p>
                   <Stepper
                     className='stepper'
-                    steps={
-                      // steps === 0
-                      //   ? [
-                      //       {
-                      //         title: '',
-                      //       },
-                      //       {
-                      //         title: '',
-                      //       },
-                      //     ]
-                      //   : steps === 1
-                      //   ? [
-                      //       {
-                      //         title: 'TITULAR',
-                      //       },
-                      //       {
-                      //         title: '',
-                      //       },
-                      //     ]
-                      //   : steps === 2
-                      //   ? [
-                      //       {
-                      //         title: 'TITULAR',
-                      //       },
-                      //       {
-                      //         title: 'CONTACTO',
-                      //       },
-                      //       {
-                      //         title: '',
-                      //       },
-                      //     ]
-                      //   : steps === 3
-                      //   ? [
-                      //       {
-                      //         title: 'TITULAR',
-                      //       },
-                      //       {
-                      //         title: 'CONTACTO',
-                      //       },
-                      //       {
-                      //         title: 'PLAN',
-                      //       },
-                      //       {
-                      //         title: '',
-                      //       },
-                      //     ]
-                      //   : steps === 4
-                      //   ? [
-                      //       {
-                      //         title: 'TITULAR',
-                      //       },
-                      //       {
-                      //         title: 'CONTACTO',
-                      //       },
-                      //       {
-                      //         title: 'PLAN',
-                      //       },
-                      //       {
-                      //         title: 'PAGO',
-                      //       },
-                      //     ]
-                      //   : null
-                      [
-                        {
-                          label: steps === 1 || steps > 1 ? 'TITULAR' : '',
-                        },
-                        {
-                          label: steps === 2 || steps > 2 ? 'CONTACTO' : '',
-                        },
-                        {
-                          label: steps === 3 || steps > 3 ? 'PLAN' : '',
-                        },
-                        {
-                          label: steps === 4 || steps > 4 ? 'PAGO' : '',
-                        },
-                        {
-                          title: '',
-                        },
-                      ]
-                    }
+                    steps={[
+                      {
+                        label: steps === 1 || steps > 1 ? 'TITULAR' : '',
+                      },
+                      {
+                        label: steps === 2 || steps > 2 ? 'CONTACTO' : '',
+                      },
+                      {
+                        label: steps === 3 || steps > 3 ? 'PLAN' : '',
+                      },
+                      {
+                        label: steps === 4 || steps > 4 ? 'PAGO' : '',
+                      },
+                      {
+                        title: '',
+                      },
+                    ]}
                     activeStep={steps}
                     completeColor='#49B8AD'
                     activeTitleColor='#49B8AD'
@@ -436,6 +364,7 @@ const Main = () => {
                     <Step3Component
                       infoData={infoData}
                       handleSelectChange={handleSelectChange}
+                      {...props}
                     />
                   ) : steps === 3 ? (
                     <Step4Component
@@ -445,17 +374,11 @@ const Main = () => {
                       handleExpireDate={handleExpireDate}
                     />
                   ) : steps === 4 ? (
-                    (<Step5Component
+                    <Step5Component
                       handleChange={handleChange}
                       infoData={infoData}
                       error={error}
-                    /> /* : steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */)
+                    />
                   ) : null}
                 </div>
               )}
@@ -523,11 +446,6 @@ const Main = () => {
                         error.expireMonthError ||
                         error.cardNumber ||
                         error.numValue) ? (
-                        // email: '',
-                        // contact: '',
-                        // expireYearError: '',
-                        // expireMonthError: '',
-                        // password: '',
                         <p className='error-muted'>
                           Please check the Error and resolve it
                         </p>

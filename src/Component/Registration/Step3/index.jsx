@@ -1,9 +1,11 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
+// import { AppRoutes } from '../../../config';
+import { Link } from 'react-router-dom';
+// import UserContext from '../../../routes/index';
 const Step3Component = (props) => {
   const { handleSelectChange, infoData } = props;
   const { duration } = infoData;
-  console.log('durationduration', duration);
   return (
     <>
       <Form className='resgistration-form'>
@@ -29,11 +31,15 @@ const Step3Component = (props) => {
           Please select one one from these to check your cyccle of the
           recurecnce.
         </p>
-        <span className='theme-link'>
+        <Link
+          to='/RegistrationChild'
+          className='theme-link'
+          onClick={() => props.history.push('/RegistrationChild')}
+        >
           Questions?
-        </span>
+        </Link>
       </Form>
-      <div className="right-box">
+      <div className='right-box'>
         <div className='daily-rectangle'>
           <div className='daily-head'>{duration}</div>
           <div className='daily-list'>
@@ -50,7 +56,6 @@ const Step3Component = (props) => {
           </div>
         </div>
       </div>
-      
     </>
   );
 };
