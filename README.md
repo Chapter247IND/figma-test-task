@@ -6,7 +6,7 @@ Test task for Figma, using ReactJS + Bootstrap + Emailjs. Dependencies are insta
 
 
 ## Demo Video:
-[See this Loom](https://www.loom.com/share/dd89075949cd452fa6370d975a9a3db0)
+[See this Loom](https://www.loom.com/share/bba2e3ed60c74841bf0137bae538da6e)
 
 ## Please create a .env file, by taking .env.example as a reference.
 
