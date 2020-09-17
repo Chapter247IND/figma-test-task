@@ -14,6 +14,7 @@ const Step2Component = (props) => {
       <Form className="resgistration-form">
         <div className="form-header">
           <h2 className='form-title'><span>Email Information details</span></h2>
+          <p className='form-subtitle'>This is Sub Registration form</p>
         </div>
         <Form.Group controlId='formBasicEmail'>
           <Form.Label>Email Address</Form.Label>

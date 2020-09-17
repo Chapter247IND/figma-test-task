@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Header from '../Layout/header';
 import { Container, Button } from 'react-bootstrap';
-// import Stepper from 'react-stepper-horizontal';
 import { useHistory, useLocation } from 'react-router-dom';
 import Step2Component from './Step2';
 import Step1Component from './Step1';
@@ -14,26 +13,11 @@ import Step5Component from './Step5';
 import Done from './Done';
 import { Stepper } from 'react-form-stepper';
 import { Email_Serviceid, Email_Template } from '../../config/AppConfig';
-// export const UserContext = React.createContext({});
 const Main = (props) => {
   // state for active step
   const [steps, setcurrentStep] = React.useState(0);
   const { infoData, setinfoData } = props;
-  // // state object to store user information
-  // const [infoData, setinfoData] = React.useState({
-  //   numValue: '',
-  //   name: 'Joe Doe',
-  //   email: '',
-  //   contact: '',
-  //   country: 'India',
-  //   duration: 'Daily',
-  //   password: '',
-  //   cardNumber: '',
-  //   expireDate: '',
-  //   expMonth: '',
-  //   expYear: '',
-  //   cvv: '',
-  // });
+
   const { state: locationState } = useLocation();
   //  state to manage error
   const [error, setError] = React.useState({
@@ -47,9 +31,11 @@ const Main = (props) => {
   const [emailSuccess, setEmailSuccess] = React.useState(false);
   const [isEmailLoading, setisEmailLoading] = React.useState(false);
   let history = useHistory();
+
   //  Manage routing with hash according to active stepper
   useEffect(() => {
-    // localStorage
+    console.log(Email_Serviceid, Email_Template,'Email_Serviceid, Email_Template');
+    
     // go back from child to parent
     if (locationState && locationState.step === 3) {
       setcurrentStep(2);
@@ -99,11 +85,9 @@ const Main = (props) => {
       setEmailSuccess(false);
       setcurrentStep(2);
     } else {
-      /* if (steps === 1) {
+      if (steps === 1) {
         handleSubmit();
-      } else */ if (
-        steps === 3
-      ) {
+      } else if (steps === 3) {
         handlePayment();
       } else {
         setcurrentStep(steps + 1);
@@ -148,11 +132,6 @@ const Main = (props) => {
       errors.expireMonthError = '';
       isError = true;
     } else {
-      // setError({
-      //   ...error,
-      //   expireYearError: "",
-      //   expireMonthError: "",
-      // });
       errors.expireYearError = '';
       errors.expireMonthError = '';
 
@@ -395,51 +374,11 @@ const Main = (props) => {
                       handleExpireDate={handleExpireDate}
                     />
                   ) : steps === 4 ? (
-                    (<Step5Component
+                    <Step5Component
                       handleChange={handleChange}
                       infoData={infoData}
                       error={error}
-                    /> /* : steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */ /*: steps === 5 ? (
-                 <Done infoData={infoData} />
-               )  */)
+                    />
                   ) : null}
                 </div>
               )}
@@ -507,11 +446,6 @@ const Main = (props) => {
                         error.expireMonthError ||
                         error.cardNumber ||
                         error.numValue) ? (
-                        // email: '',
-                        // contact: '',
-                        // expireYearError: '',
-                        // expireMonthError: '',
-                        // password: '',
                         <p className='error-muted'>
                           Please check the Error and resolve it
                         </p>
@@ -529,7 +463,6 @@ const Main = (props) => {
               <EmailSent handleStepper={handleStepper} />{' '}
             </div>
           )}
-          {/* </UserContext.Provider> */}
         </Container>
       </section>
     </>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Row } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { useEffect } from 'react';
 import addIcon from '../../../assets/img/add.svg';
 import user from '../../../assets/img/perfil.svg';
@@ -46,15 +46,15 @@ const Step3Component = (props) => {
         {prevData && prevData.length
           ? prevData.map((list) => {
               return (
-                <Row>
+                <div className='user-list '>
                   {' '}
-                  <img src={user} alt='user' /> &nbsp;
+                  <img src={user} alt='user' />
                   {list.name}
-                </Row>
+                </div>
               );
             })
           : null}
-        <Row className='mt-2 cursor-pointer'>
+        <div className='mt-4 cursor-pointer user-list '>
           <span
             onClick={() => {
               setcurrentStep(0);
@@ -67,11 +67,10 @@ const Step3Component = (props) => {
               });
             }}
           >
-            {/* // set step 0 */}
             <img src={addIcon} alt='add' />
-            &nbsp; Add More
+            Add More
           </span>
-        </Row>
+        </div>
       </Form>
     </>
   );

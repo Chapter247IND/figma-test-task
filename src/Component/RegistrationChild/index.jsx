@@ -183,7 +183,7 @@ const Child = () => {
               ) : null}
             </div>
             <>
-              <div className='d-flex align-items-center justify-content-between btn-wrap'>
+              <div className='d-flex align-items-start justify-content-between btn-wrap'>
                 <Button
                   variant='link'
                   className='btn-theme-outline mb-2'
@@ -201,7 +201,7 @@ const Child = () => {
                 >
                   Previous
                 </Button>
-                <div>
+                <div className='d-flex align-items-end flex-column'>
                   {console.log('steps', steps)}
                   <Button
                     variant='link'
