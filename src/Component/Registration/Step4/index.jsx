@@ -7,11 +7,12 @@ import infoicon from '../../../assets/img/info-icon.svg';
 
 const Step4Component = (props) => {
   const { handleChange, error, handleExpireDate } = props;
-  const { cardNumber, cvv, expireDate, duration, name } = props.infoData;
+  const { cardNumber, cvv, expireDate, duration, name, promo } = props.infoData;
   const { expireMonthError, expireYearError } = error;
   const [show, setShow] = useState(true);
+  const [showPromo, setShowPromo] = useState(false);
   return (
-   <>
+    <>
       <Form className='resgistration-form'>
         <div className='form-header'>
           <h2 className='form-title'>
@@ -21,7 +22,12 @@ const Step4Component = (props) => {
 
         <Form.Group controlId='formBasicNumber'>
           <Form.Label>Name</Form.Label>
-          <Form.Control type='text' value={name} readOnly placeholder={"Joe Doe"} />
+          <Form.Control
+            type='text'
+            value={name}
+            readOnly
+            placeholder={'Joe Doe'}
+          />
         </Form.Group>
 
         <Form.Group>
@@ -74,7 +80,6 @@ const Step4Component = (props) => {
                     error.expireDate || expireYearError || expireMonthError,
                 })}
                 placeholder='mm/aa'
-                
                 id='expireDate'
                 name='expireDate'
                 value={expireDate}
@@ -93,8 +98,12 @@ const Step4Component = (props) => {
           </Col>
           <Col md='6'>
             <Form.Group>
-              <Form.Label htmlFor='cvv'> CVV
-              <span className="info-img"><img src={infoicon}  alt="info icon" /></span>
+              <Form.Label htmlFor='cvv'>
+                {' '}
+                CVV
+                <span className='info-img'>
+                  <img src={infoicon} alt='info icon' />
+                </span>
               </Form.Label>
               <div className={'input-block'}>
                 <MaskedInput
@@ -114,17 +123,32 @@ const Step4Component = (props) => {
                 ) : null}
               </div>
             </Form.Group>
-            
           </Col>
+          {showPromo ? (
+            <Col md='6'>
+              <Form.Group>
+                <Form.Label>Promo code</Form.Label>
+                <Form.Control
+                  type='text'
+                  value={promo}
+                  name={'promo'}
+                  onChange={handleChange}
+                  placeholder={'PROMO 24'}
+                />
+              </Form.Group>
+            </Col>
+          ) : null}
         </Row>
-        {/* <div>
-          <span className='theme-link'>
-            PROMO?
-          </span>
-        </div> */}
+        {!showPromo ? (
+          <div>
+            <span className='theme-link' onClick={() => setShowPromo(true)}>
+              PROMO?
+            </span>
+          </div>
+        ) : null}
       </Form>
 
-      <div className="right-box stp4-box">
+      <div className='right-box stp4-box'>
         <div className='daily-rectangle'>
           <div className='daily-head'>{duration}</div>
           <div className='daily-list'>
@@ -151,7 +175,7 @@ const Step4Component = (props) => {
             variant='danger'
             onClose={() => setShow(false)}
             dismissible
-            className="custom-alert-box"
+            className='custom-alert-box'
           >
             <> Please resolve the error</>
           </Alert>

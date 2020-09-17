@@ -4,16 +4,18 @@ import '../index.css';
 
 const Done = (props) => {
   useEffect(() => {
+    const contactData = JSON.parse(localStorage.getItem('contactData'));
     let number = props.infoData.numValue;
     delete props.infoData.expYear;
     delete props.infoData.expMonth;
     delete props.infoData.numValue;
 
     const data = {
-      ...props.infoData,
-      number,
+      userData: { ...props.infoData, number },
+      contactData: { contactData },
     };
     localStorage.setItem('data', JSON.stringify(data));
+
     // eslint-disable-next-line
   }, []);
   return (
@@ -24,7 +26,6 @@ const Done = (props) => {
         <img src={email} alt={'email'} />
       </div>
     </div>
-    
   );
 };
 
